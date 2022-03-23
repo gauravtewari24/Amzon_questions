@@ -44,5 +44,5 @@ int main()
 {
     string x = "GXTXAYB";
     string y = "GTAB";
-    cout << lcs_naive(x, y, x.length(), y.length());
+    cout << lcs(x, y);
 }

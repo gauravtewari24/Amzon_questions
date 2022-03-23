@@ -12,7 +12,7 @@ int mincost(vector<int> v, int cur)
     //  return dp[cur];
     int mini = INT_MAX;
     int cost = 0;
-    for (int i = 1; i < 3; i++)
+    for (int i = 1; i < k; i++)
     {
         int temp = mincost(v, cur + i);
         mini = min(temp, mini);

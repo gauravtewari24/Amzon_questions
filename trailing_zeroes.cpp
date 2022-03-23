@@ -4,7 +4,7 @@ using namespace std;
 // bruteforce -- divide factorial by 10 till the remainder is 0.
 int main()
 {
-    int n = 100;
+    int n = 28;
 
     int cnt5 = 0;
 
