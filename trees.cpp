@@ -157,6 +157,7 @@ int main()
        cout << " ancestor "
             << "NO\0YES" + 3 * ancestors(root, 15) << endl;
    */
+
     if (isBST(root))
         cout << "Is BST";
     else
