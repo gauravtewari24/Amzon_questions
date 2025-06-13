@@ -1,3 +1,7 @@
+// merge k sorted linked list into one
+// will take array with k size and compare the first element whicever is lower store in new curr node value
+// and increment that row to next element
+
 #include <bits/stdc++.h>
 using namespace std;
 

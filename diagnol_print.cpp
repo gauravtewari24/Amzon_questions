@@ -1,3 +1,13 @@
+// Create a hard coded tree
+//         8
+//       /   \
+        //     3      10
+//    /      /  \
+        //   1      6    14
+//         / \   /
+//        4   7 1
+// print: 8 10 14 3 6 7 13 1 4
+
 #include <bits/stdc++.h>
 using namespace std;
 struct node

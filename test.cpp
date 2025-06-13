@@ -3,53 +3,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node
+void topKFrequent(int nums[], int n, int k)
 {
-    int data;
-    Node *left;
-    Node *right;
-};
+    unordered_map<int, int> um;
 
-Node *newNode(int data)
-{
-    Node *node = new Node;
-    node->data = data;
-    node->left = NULL;
-    node->right = NULL;
+    for (int i = 0; i < n; i++)
+    {
+        um[nums[i]]++;
+    }
 
-    return node;
+    priority_queue<pair<int, int>, vector<pair<int, int>>> pq;
+    for (auto it : um)
+    {
+        pq.push({it.second, it.first});
+    }
+    
+    for (int i = 0; i < k; i++)
+    {
+        cout << pq.top().second << " ";
+        pq.pop();
+    }
 }
-bool isSymmetric(Node *root1, Node *root2)
+int main()
 {
-    if (root1 == NULL && root2 == NULL)
-        return true;
-    // For two trees to be mirror
-    //  images, the following
-    //  three conditions must be true
-    //  1 - Their root node's
-    //  key must be same 2 - left
-    //  subtree of left tree and right subtree
-    //  of right tree have to be mirror images
-    //  3 - right subtree of left tree and left subtree
-    //  of right tree have to be mirror images
-    if (root1 && root2 && root1->data == root2->data)
-        return isSymmetric(root1->left, root2->right) && isSymmetric(root1->right, root2->left);
-
-    return false;
-}
-main()
-{
-    Node *root = newNode(1);
-    root->left = newNode(2);
-    root->right = newNode(2);
-    root->left->left = newNode(3);
-    root->left->right = newNode(4);
-    root->right->left = newNode(4);
-    root->right->right = newNode(3);
-
-    if (isSymmetric(root, root))
-        cout << "Symmetric";
-    else
-        cout << "Not symmetric";
+    int arr[] = {1, 1, 1, 2, 2, 3};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 2;
+    topKFrequent(arr, n, k);
     return 0;
 }

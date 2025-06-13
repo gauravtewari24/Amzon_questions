@@ -1,6 +1,6 @@
 // A Stack based C++ program to find next
 // greater element for all array elements
-// in same order as input.
+// in same order as input. and if not print -1;
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -36,7 +36,7 @@ void printNGE(int arr[], int n)
 // Driver Code
 int main()
 {
-    int arr[] = {11, 13, 21, 3};
+    int arr[] = {11, 13, 21, 3, 22};
     int n = sizeof(arr) / sizeof(arr[0]);
 
     // Function call

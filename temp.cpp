@@ -1,73 +1,97 @@
+// C++ implementation to find k numbers with most
+// occurrences in the given array
 #include <bits/stdc++.h>
+
 using namespace std;
 
-#include <bits/stdc++.h>
-using namespace std;
-#define bool int
-
-/* A binary tree node has data, pointer to left child
-and a pointer to right child */
-class node
+bool condition(char ar[3][3])
 {
-public:
-    int data;
-    node *left;
-    node *right;
-};
+	int j = 0;
+	if (ar[0][0] == ar[1][1] && ar[1][1] == ar[2][2] && ar[0][0] != '.')
+		return true;
+	else if (ar[2][0] == ar[1][1] && ar[1][1] == ar[2][0] && ar[2][0] != '.')
+		return true;
 
-bool hasPathSum(node *Node, int sum)
-{
+	for (int i = 0; i < 3; i++)
+	{
+		int row = 0, col = 0;
+		for (int j = 1; j < 3; j++)
+		{
+			if (ar[i][j] == '.')
+			{
+				row = 1;
+				break;
+			}
+			if (ar[i][j] != ar[i][j - 1])
+				row = 1;
+		}
+		for (int j = 1; j < 3; j++)
+		{
+			if (ar[j][i] == '.')
+			{
+				col = 1;
+				break;
+			}
+			if (ar[j][i] != ar[j - 1][i])
+				col = 1;
+		}
+		if (row == 0 || col == 0)
+			return true;
+	}
 
-    bool ans = 0;
-
-    int subSum = sum - Node->data;
-
-    /* If we reach a leaf node and sum becomes 0 then return true*/
-    if (subSum == 0 && Node->left == NULL && Node->right == NULL)
-        return 1;
-
-    /* otherwise check both subtrees */
-    if (Node->left)
-        ans = ans || hasPathSum(Node->left, subSum);
-    if (Node->right)
-        ans = ans || hasPathSum(Node->right, subSum);
-
-    return ans;
+	return false;
 }
 
-node *newnode(int data)
+void show(char ar[3][3])
 {
-    node *Node = new node();
-    Node->data = data;
-    Node->left = NULL;
-    Node->right = NULL;
 
-    return (Node);
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cout << ar[i][j] << " | ";
+		}
+		cout << "\n";
+	}
 }
 
+// Driver program to test above
 int main()
 {
-
-    int sum = 21;
-
-    /* Constructed binary tree is
-                10
-            / \
-            8 2
-        / \ /
-        3 5 2
-    */
-    node *root = newnode(10);
-    root->left = newnode(8);
-    root->right = newnode(2);
-    root->left->left = newnode(3);
-    root->left->right = newnode(5);
-    root->right->left = newnode(2);
-
-    if (hasPathSum(root, sum))
-        cout << "There is a root-to-leaf path with sum " << sum;
-    else
-        cout << "There is no root-to-leaf path with sum " << sum;
-
-    return 0;
+	char ar[3][3];
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			ar[i][j] = '.';
+		}
+		cout << "\n";
+	}
+	show(ar);
+	int cnt = 1;
+	bool win = true;
+	do
+	{
+		cout << "Enter your Choice ((1 1),(1 2),..(2 3)....) : ";
+		int a, b;
+		cin >> a >> b;
+		a--;
+		b--;
+		if (cnt % 2 != 0)
+		{
+			ar[a][b] = 'X';
+			if (condition(ar))
+				cout << "Player 1 wins \n", win = false;
+		}
+		else
+		{
+			ar[a][b] = 'O';
+			if (condition(ar))
+				cout << "Player 2 wins \n", win = false;
+		}
+		show(ar);
+		cnt++;
+		if (cnt > 8)
+			cout << "No Player Wins \n", win = false;
+	} while (win);
 }

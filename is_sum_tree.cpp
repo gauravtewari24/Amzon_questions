@@ -1,5 +1,8 @@
 // C++ program to check if Binary tree
 // is sum tree or not
+// sum tree is basically if left subtree and right subtree individually equals to current value.
+// solved as in left tree val and right tree val and compare with curr node val.
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -70,13 +73,14 @@ node *newNode(int data)
 int main()
 {
     node *root = newNode(26);
-    root->left = newNode(12);
+    root->left = newNode(10);
     root->right = newNode(3);
     root->left->left = newNode(4);
     root->left->right = newNode(6);
     root->right->right = newNode(3);
 
     int total = isSumTree(root);
+    cout << total;
     if (total != -1 && total == 2 * (root->data))
         cout << "Tree is a Sum Tree";
     else

@@ -127,6 +127,171 @@ bool ancestors(node *root, int val)
     }
     return 0;
 }
+
+bool isSymmetric(node *root1, node *root2)
+{
+    if (root1 == NULL && root2 == NULL)
+        return true;
+    // For two trees to be mirror
+    //  images, the following
+    //  three conditions must be true
+    //  1 - Their root node's
+    //  key must be same 2 - left
+    //  subtree of left tree and right subtree
+    //  of right tree have to be mirror images
+    //  3 - right subtree of left tree and left subtree
+    //  of right tree have to be mirror images
+    if (root1 && root2 && root1->val == root2->val)
+        return isSymmetric(root1->left, root2->right) && isSymmetric(root1->right, root2->left);
+
+    return false;
+}
+
+void level_rightview(node *root)
+{
+    if (!root)
+        return;
+
+    queue<node *> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        int n = q.size();
+        while (n--)
+        {
+            node *temp = q.front();
+            if (n == 0)
+                cout << temp->val;
+
+            if (temp->left)
+                q.push(temp->left);
+            if (temp->right)
+                q.push(temp->right);
+            q.pop();
+        }
+    }
+}
+
+int isLeaf(node *node)
+{
+    if (node == NULL)
+        return 0;
+    if (node->left == NULL && node->right == NULL)
+        return 1;
+    return 0;
+}
+
+/* returns data if SumTree property holds for the given
+    tree else return -1*/
+int isSumTree(node *node)
+{
+    if (node == NULL)
+        return 0;
+
+    int ls; // for sum of nodes in left subtree
+    int rs; // for sum of nodes in right subtree
+
+    ls = isSumTree(node->left);
+    if (ls == -1) // To stop for further traversal of tree if found not sumTree
+        return -1;
+
+    rs = isSumTree(node->right);
+    if (rs == -1) // To stop for further traversal of tree if found not sumTree
+        return -1;
+
+    if (isLeaf(node) || ls + rs == node->val)
+        return ls + rs + node->val;
+    else
+        return -1;
+}
+
+void utility_fun(node *root, int level, map<int, vector<int>> &m)
+{
+    if (!root)
+        return;
+
+    m[level].push_back(root->val);
+    utility_fun(root->left, level + 1, m);
+    utility_fun(root->right, level, m);
+}
+
+void diagonolPrint(node *root)
+{
+    if (root == NULL)
+        return;
+
+    map<int, vector<int>> m;
+    utility_fun(root, 0, m);
+
+    for (auto temp : m)
+    {
+        // cout<<"HOp";
+        for (int x : temp.second)
+        {
+            cout << x << " .";
+        }
+        cout << "\n";
+    }
+    // cout<<"HO"<<m.size();
+}
+
+// function to print the zigzag traversal
+void zizagtraversal(struct node *root)
+{
+    // if null then return
+    if (!root)
+        return;
+
+    // declare two stacks
+    stack<node *> currentlevel;
+    stack<node *> nextlevel;
+
+    // push the root
+    currentlevel.push(root);
+
+    // check if stack is empty
+    bool lefttoright = true;
+    while (!currentlevel.empty())
+    {
+
+        // pop out of stack
+        struct node *temp = currentlevel.top();
+        currentlevel.pop();
+
+        // if not null
+        if (temp)
+        {
+
+            // print the data in it
+            cout << temp->val << " ";
+
+            // store data according to current
+            // order.
+            if (lefttoright)
+            {
+                if (temp->left)
+                    nextlevel.push(temp->left);
+                if (temp->right)
+                    nextlevel.push(temp->right);
+            }
+            else
+            {
+                if (temp->right)
+                    nextlevel.push(temp->right);
+                if (temp->left)
+                    nextlevel.push(temp->left);
+            }
+        }
+
+        if (currentlevel.empty())
+        {
+            lefttoright = !lefttoright;
+            swap(currentlevel, nextlevel);
+        }
+    }
+}
+
 int main()
 {
     node *root = new node(6);

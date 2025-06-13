@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+// this is point based graph, where we decide whether to take y axis or x axis to reach to next point.
 
 int coverPoints(vector<array<int, 2>> v, int n)
 {

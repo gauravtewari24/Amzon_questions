@@ -1,4 +1,9 @@
 // K maximum sum combinations from two arrays
+// Input: N = 4, K = 3, A [ ] = {1, 2, 3, 4}, B [ ] = {1, 2, 5, 6}
+// Output: {10, 9, 9}
+// Explanation: 11 -> (A : 4) + (B : 6)
+//              10 -> (A : 4) + (B : 5)
+//               9 -> (A : 3) + (B : 6)
 
 #include <bits/stdc++.h>
 
@@ -23,7 +28,6 @@ void ksum(vector<int> a, vector<int> b, int k)
         cout << temp.first << "\n";
         int x = temp.second.first;
         int y = temp.second.second;
-
         if (s.find({x - 1, y}) == s.end())
         {
             p.push({a[x - 1] + b[y], {x - 1, y}});

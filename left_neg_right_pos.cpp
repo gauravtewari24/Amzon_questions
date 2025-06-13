@@ -1,3 +1,7 @@
+// position the negative to left and pos to right
+// the positives will be in opposite order
+// if want the positive to be in order than reverse them
+
 #include <bits/stdc++.h>
 using namespace std;
 

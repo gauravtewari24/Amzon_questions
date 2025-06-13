@@ -1,3 +1,7 @@
+// It determines if there exists an edge in the binary tree such that removing it
+// divides the tree into two subtrees of equal size
+// (i.e., each containing n/2 nodes if the total number of nodes is n).
+
 #include <bits/stdc++.h>
 using namespace std;
 

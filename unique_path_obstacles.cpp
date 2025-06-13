@@ -14,7 +14,7 @@ int UniquePathHelper(int i, int j, int r, int c,
     if (A[i][j] == 1)
     {
         return 0;
-    }
+    }   
 
     // base case
     if (i == r - 1 && j == c - 1)
